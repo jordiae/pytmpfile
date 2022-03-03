@@ -3,14 +3,14 @@ import contextlib
 from typing import Optional
 
 __all__ = ['get_tmp_path', 'tempdir']
-__version__ = '0.1.5'
+__version__ = '0.1.6'
 
 # Credits: https://pypi.org/project/memory-tempfile/
-tempfile = MemoryTempfile(preferred_paths=['/run/user/{uid}'], remove_paths=['/dev/shm', '/run/shm'],
-                          additional_paths=['/var/run'], filesystem_types=['tmpfs'], fallback=True)
+tempfile = MemoryTempfile(fallback=True)#(preferred_paths=['/run/user/{uid}'], remove_paths=['/dev/shm', '/run/shm'],
+#                          additional_paths=['/var/run'], filesystem_types=['tmpfs'], fallback=True)
 
-if not tempfile.found_mem_tempdir():
-    raise RuntimeError('No tmp directory found')
+#if not tempfile.found_mem_tempdir():
+#    raise RuntimeError('No tmp directory found')
 
 
 def tempdir():
