@@ -6,7 +6,7 @@ import glob
 import shutil
 
 __all__ = ['get_tmp_path', 'tempdir']
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 SCRATCH_TMP = os.path.join('/scratch', 'tmp', os.environ['SLURM_JOB_ID']) if 'SLURM_JOB_ID' in os.environ else None
 PREF_PATH = [SCRATCH_TMP] if SCRATCH_TMP and os.path.exists(SCRATCH_TMP) else []
@@ -16,7 +16,8 @@ tempfile = MemoryTempfile(preferred_paths=PREF_PATH + ['/run/user/{uid}'],
                           filesystem_types=['tmpfs', 'ramfs', 'xfs'], fallback=True)
 
 if not tempfile.found_mem_tempdir():
-    raise RuntimeError('No tmp directory found')
+    # raise RuntimeError('No tmp directory found')
+    import tempfile
 
 
 def tempdir():
